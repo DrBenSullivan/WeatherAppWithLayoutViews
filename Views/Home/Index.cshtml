@@ -1,4 +1,6 @@
-﻿@model List<CityWeather>
+﻿@model List<CityWeather>;
+@using Microsoft.AspNetCore.Html;
+
 @{
 	ViewData["Title"] = "Weather App With Layout Views";
 	Layout = "~/Views/_Layout.cshtml";
@@ -7,30 +9,12 @@
 <div class="flex">
 	@foreach (var city in Model)
 	{
-		string divColour = "flex-borderless ";
-		if (city.TemperatureFahrenheit < 44)
+		var partialModel = new CityWeatherPartialViewModel()
 		{
-			divColour += "blue-back";
-		}
-		else if (city.TemperatureFahrenheit < 74)
-		{
-			divColour += "green-back";
-		}
-		else
-		{
-			divColour += "orange-back";
-		}
-
-		<div class="@divColour">
-			<div>
-				<h3>@city.CityName</h3>
-				<h4 class="text-dark-grey">@city.DateAndTime.ToString("hh:mm tt")</h4>
-				<a href="/weather/@city.CityUniqueCode">Details</a>
-			</div>
-			<div class="border-left">
-				<h3>@city.TemperatureFahrenheit<span class="text-dark-grey">&deg;F</span></h3>
-			</div>
-		</div>
+			CityWeatherData = city,
+			IsSelected = false
+		};
+		@await Html.PartialAsync("_CityWeather", partialModel);
 	}
 </div>
 

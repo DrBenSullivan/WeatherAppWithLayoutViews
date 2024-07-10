@@ -1,0 +1,33 @@
+﻿@model CityWeatherPartialViewModel;
+
+@{
+	string divColour = "";
+	if (!Model.IsSelected) {
+		if (Model.CityWeatherData.TemperatureFahrenheit < 44)
+		{
+			divColour += "blue-back";
+		}
+		else if (Model.CityWeatherData.TemperatureFahrenheit < 74)
+		{
+			divColour += "green-back";
+		}
+		else
+		{
+			divColour += "orange-back";
+		}
+	}
+}
+
+<div class="flex-borderless @divColour">
+	<div>
+		<h3>@Model.CityWeatherData.CityName</h3>
+		<h4 class="text-dark-grey">@Model.CityWeatherData.DateAndTime.ToString("hh:mm tt")</h4>
+		@if (!Model.IsSelected)
+		{
+			<a href="/weather/@Model.CityWeatherData.CityUniqueCode">Details</a>
+		}
+	</div>
+	<div class="border-left">
+		<h3>@Model.CityWeatherData.TemperatureFahrenheit<span class="text-dark-grey">&deg;F</span></h3>
+	</div>
+</div>
