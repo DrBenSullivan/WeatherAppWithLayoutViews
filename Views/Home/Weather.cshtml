@@ -1,0 +1,21 @@
+﻿@model CityWeather;
+
+@{
+	ViewData["Title"] = Model.CityName + " Weather";
+	Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="flex">
+	<div class="flex-borderless">
+		<div>
+			<h3>@Model.CityName</h3>
+			<h4 class="text-dark-grey">@Model.DateAndTime.ToString("hh:mm tt")</h4>
+		</div>
+		<div class="border-left">
+			<h3>@Model.TemperatureFahrenheit<span class="text-dark-grey">&deg;F</span></h3>
+		</div>
+	</div>
+</div>
+<p class="text-center"><a href="/">Back To Weather Home Page</a></p>
+
+
